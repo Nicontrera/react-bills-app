@@ -1,0 +1,559 @@
+/*
+#36d1dc to 5b86e5
+*/
+
+#BillsApp {
+  background: rgb(255,194,116);
+  background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  &.blue-theme {
+    background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+    header .theme-color .selected-color {
+      background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+    }
+  }
+  &.green-theme {
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    header .theme-color .selected-color {
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    }
+  }
+  &.orange-theme {
+    background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+    header .theme-color .selected-color {
+    background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+    }
+  }
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    .theme-color {
+      width: 100%;
+      height: 80px;
+      background: #b4c5e0;
+      border: 1px solid white;
+      border-left: none;
+      border-right: none;
+      margin: 40px 0 0 0;
+      text-align: inherit;
+      display: grid;
+      grid-template-columns: 3fr 2fr 0.6fr;
+      grid-gap: 15px;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 10px 15px 15px;
+      position: relative;
+      z-index: 5;
+      cursor: pointer;
+      h4 {
+        color: white;
+
+      }
+      .selected-color {
+        width: 100px;
+        height: 60%;
+        background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+        border-radius: 15px;
+      }
+      .angle-icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .angle-icon .fas {
+        font-size: 2.4rem;
+        color: white;
+      }
+    }
+    .theme-selector {
+      width: 100%;
+      height: 80px;
+      background: #b4c5e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid white;
+      position: relative;
+      z-index: 1;
+      transform: translate3d(0, -100%, 0);
+      transition: transform .4s ease-in-out;
+      &.active {
+        transform: translate3d(0, 0, 0);
+      }
+      select {
+        width: 80%;
+        height: 40px;
+        font-size: 1.2rem;
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+
+  .total-bills {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      .text {
+        font-size: 1.3rem;
+      }
+      .number {
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+      }
+    }
+
+  #AllBills {
+    position: relative;
+    z-index: 3;
+    height: calc(100vh - 200px );
+    overflow: overlay;
+    .container {
+      width: 100%;
+      padding: 0 20px;
+      margin-bottom: 75px;
+    }
+  
+    
+    .bills-list {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      -webkit-box-shadow: 0px 10px 31px -9px rgba(138,127,138,1);
+      -moz-box-shadow: 0px 10px 31px -9px rgba(138,127,138,1);
+      box-shadow: 0px 10px 31px -9px rgba(138,127,138,1);
+      .bill {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 20px;
+        overflow: hidden;
+        height: 82px;
+        background: #ffffff;
+        &.active {
+          background: #75f041;
+        }
+        &:hover {
+          .buttons{
+            transform: translate3d(0,0,0);
+          }
+        }
+        &:last-child {
+          border: none;
+        }
+        .company {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .logo {
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 30%;
+            }
+          }
+          .title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-left: 20px;
+            color: #606060;
+            text-transform: capitalize;
+          }
+        }
+        .price {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: rgb(120,120,120);
+        }
+        .buttons {
+          display: flex;
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 100%;
+          width: 100px;
+          transform: translate3d(100%,0,0);
+          transition: transform .4s ease-in-out;
+          cursor: pointer;
+          color: white;
+          .paid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #75f041;
+            width: 50%;
+          }
+          .delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f24438;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  
+
+
+
+  .content-background {
+    background: #e8e8e8;
+    height: 77vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  #FloatingMenu {
+    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    -webkit-box-shadow: 0px -10px 31px -9px rgba(168,159,168,1);
+    -moz-box-shadow: 0px -10px 31px -9px rgba(168,159,168,1);
+    box-shadow: 0px -10px 31px -9px rgba(168,159,168,1);
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: rgb(190,190,190);
+      transition: all .6s ease-in-out;
+    }
+    .text {
+      font-size: .8rem;
+      color: rgb(190,190,190);
+      transition: all .6s ease-in-out;
+    }
+    &.blue-theme .link:hover{
+      background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      .far:before, .fas:before {
+        background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    &.blue-theme .add-button {
+      background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+    }
+    &.green-theme .link:hover{
+      background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      .far:before, .fas:before {
+        background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    &.green-theme .add-button {
+      background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    }
+    &.orange-theme .link:hover{
+      background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      .far:before, .fas:before {
+        background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    &.orange-theme .add-button {
+      background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+    }
+    .link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all .6s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        background: linear-gradient(90deg, rgba(255,194,116,1) 0%, rgba(255,135,100,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        .far:before, .fas:before {
+          background: linear-gradient(90deg, rgba(255,194,116,1) 0%, rgba(255,135,100,1) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        &:last-child {
+          .far:before, .fas:before {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
+      &:last-child {
+          .far:before, .fas:before {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: .9rem;
+          }
+        }
+    }
+    .add-button {
+      background: linear-gradient(90deg, rgba(255,194,116,1) 0%, rgba(255,135,100,1) 100%);
+      height: 55px;
+      width: 55px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+}
+
+#AddBill {
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  transform: translate3d(100%, 0, 0);
+  transition: transform .4s ease-in-out;
+  &.blue-theme {
+    background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+  }
+  &.green-theme {
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+  }
+  &.orange-theme {
+    background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+  }
+  &.active {
+    transform: translate3d(0, 0, 0);
+  }
+  .container {
+    padding: 0 20px;
+  }
+  h2 {
+    font-size: 2rem;
+    color: white;
+    text-transform: uppercase;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .form-group {
+    margin: 0 0 1.5rem;
+  }
+  label {
+    display: block;
+    color: white;
+    font-style: .8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  input {
+    display: block;
+    background: transparent;
+    border: 1px solid white;
+    font-size: 1.1rem;
+    padding: 7px;
+    color: white;
+    width: 100%;
+    &:focus {
+      outline: 0;
+    }
+  }
+  button {
+    background: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: .8rem;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+      border: 1px solid black;
+      padding: 9px;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #app {
+    background: black;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #BillsApp {
+    background: rgb(61,255,134);
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    width: 324px;
+    height: 700px;
+    border-radius: 15px;
+
+  }
+  #BillsApp .content-background{
+    height: 500px;
+  }
+  
+  #BillsApp #FloatingMenu .add-button {   
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      top: -1px;
+    }
+  }
+  #BillsApp #FloatingMenu .link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all .6s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      .far:before, .fas:before {
+        background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      &:last-child {
+        .far:before, .fas:before {
+          background: white;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
+  #BillsApp.green-theme #FloatingMenu.green-theme .link:hover {
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    .far:before, .fas:before {
+      background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  #BillsApp.orange-theme #FloatingMenu.orange-theme .link:hover {
+    background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    .far:before, .fas:before {
+      background: linear-gradient(90deg, rgba(255,194,117,1) 0%, rgba(255,135,100,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  #BillsApp.blue-theme #FloatingMenu.blue-theme .link:hover {
+    background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    .far:before, .fas:before {
+      background: linear-gradient(90deg, #36d1dc 0%, #5b86e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  #AddBill {
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+  overflow: hidden;
+  .container {
+    padding: 0 20px;
+  }
+}
+  #BillsApp header .theme-color .selected-color {
+    width: 100px;
+    height: 60%;
+    background: linear-gradient(90deg, rgba(61,255,134,1) 0%, rgba(51,235,72,1) 100%);
+    border-radius: 15px;
+  }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0,0,0,0);
+  color: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent; 
+  width: 10px;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,.3); 
+}
