@@ -13,7 +13,7 @@ export default class BillsApp extends Component {
 			addBillOpen: false,
 			themeSelectorOpen: false,
 			sectionOpen: 'billsList',
-			themeColor: '',
+			themeColor: 'blue',
 			allBills: [
 				{
 					business_name: 'Netflix',
